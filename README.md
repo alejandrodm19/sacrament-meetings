@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 <!-- New comment added from peer code review branch -->
 
+<!-- Commit to Vercel -->
+
 ## Getting Started
 
 First, run the development server:

@@ -1,10 +1,14 @@
 import MeetingCard from '@/components/MeetingCard';
 import type { SacramentMeeting } from '@/lib/types';
 
-// Función para obtener los datos desde tu API local
+// Función para obtener los datos desde tu API 
 async function fetchMeetings(): Promise<SacramentMeeting[]> {
-  const res = await fetch('http://localhost:3000/api/meetings', { 
-    cache: 'no-store' // Asegura que siempre obtengas los datos más recientes
+  const baseUrl = process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}` 
+    : 'http://localhost:3000';
+
+  const res = await fetch(`${baseUrl}/api/meetings`, { 
+    cache: 'no-store' 
   });
   
   if (!res.ok) {
