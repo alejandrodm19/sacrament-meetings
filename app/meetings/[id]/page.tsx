@@ -2,7 +2,13 @@ import MeetingDetail from '@/components/MeetingDetail';
 import { notFound } from 'next/navigation';
 
 async function fetchMeeting(id: string) {
-  const res = await fetch(`http://localhost:3000/api/meetings/${id}`, { cache: 'no-store' });
+  // Define la URL dinámicamente según el entorno
+  const baseUrl = process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}` 
+    : 'http://localhost:3000';
+
+  const res = await fetch(`${baseUrl}/api/meetings/${id}`, { cache: 'no-store' });
+  
   if (res.status === 404) return null;
   if (!res.ok) throw new Error('Error al cargar la reunión');
   return res.json();
@@ -16,7 +22,7 @@ export default async function SingleMeetingPage({
   // Extrae el id usando await
   const { id } = await params; 
   
-  // Ahora sí, pasamos el id real a tu función fetchMeeting
+  // Pasamos el id real a la función fetchMeeting
   const meeting = await fetchMeeting(id);
 
   if (!meeting) {
