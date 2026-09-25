@@ -2,7 +2,6 @@ import MeetingDetail from '@/components/MeetingDetail';
 import { notFound } from 'next/navigation';
 
 async function fetchMeeting(id: string) {
-  // Define la URL dinámicamente según el entorno
   const baseUrl = process.env.VERCEL_URL 
     ? `https://${process.env.VERCEL_URL}` 
     : 'http://localhost:3000';
@@ -19,10 +18,8 @@ export default async function SingleMeetingPage({
 }: { 
   params: Promise<{ id: string }> 
 }) {
-  // Extrae el id usando await
   const { id } = await params; 
   
-  // Pasamos el id real a la función fetchMeeting
   const meeting = await fetchMeeting(id);
 
   if (!meeting) {
