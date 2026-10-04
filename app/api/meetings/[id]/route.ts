@@ -5,7 +5,6 @@ export async function GET(
   request: Request, 
   { params }: { params: Promise<{ id: string }> }
 ) {
-  // Aquí sí extraemos el id esperando la promesa
   const { id } = await params;
   
   const numericId = Number(id);

@@ -45,7 +45,7 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
         {/* Apertura */}
         <div className="space-y-2 text-sm text-slate-700">
-          <p><span className="font-semibold text-slate-900">Opening Hymn:</span> #{meeting.openingHymn.number} - {meeting.openingHymn.title}</p>
+          <p><span className="font-semibold text-slate-900">Opening Hymn:</span> #{meeting.openingHymn?.number} - {meeting.openingHymn?.title}</p>
           <p><span className="font-semibold text-slate-900">Opening Prayer:</span> {meeting.openingPrayer}</p>
         </div>
 
@@ -66,7 +66,7 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
         {/* Santa Cena */}
         <div className="text-sm text-slate-700 text-center py-4 bg-slate-50 rounded-lg border border-slate-100">
           <p className="font-semibold text-slate-900 mb-1">Administration of the Sacrament</p>
-          <p>Hymn #{meeting.sacramentHymn.number} - {meeting.sacramentHymn.title}</p>
+          <p>Hymn #{meeting.sacramentHymn?.number} - {meeting.sacramentHymn?.title}</p>
         </div>
 
         <hr className="border-slate-100" />
