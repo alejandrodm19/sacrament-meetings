@@ -5,14 +5,14 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center text-center py-12">
       
-      {/* 2. Agrega la imagen optimizada (Hero Image) */}
+      {}
       <Image 
-        src="/hero.jpg"           // La ruta empieza con / apuntando a la carpeta public
-        alt="Sacrament Meeting"   // Atributo alt obligatorio para accesibilidad
-        width={800}               // Ancho explícito para evitar layout shift
-        height={400}              // Alto explícito para evitar layout shift
+        src="/hero.jpg"           
+        alt="Sacrament Meeting"   
+        width={800}               
+        height={400}              
         className="rounded-2xl shadow-md mb-10 object-cover"
-        priority={true}           // Priority le dice a Next.js que la cargue de inmediato
+        priority={true}           
       />
       
       <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">

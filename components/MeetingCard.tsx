@@ -1,11 +1,14 @@
 import type { SacramentMeeting } from '@/lib/types'; 
 import Link from 'next/link';
+import { deleteMeeting } from '@/lib/actions';
 
 interface MeetingCardProps {
   meeting: SacramentMeeting;
 }
 
 export default function MeetingCard({ meeting }: MeetingCardProps) {
+  const deleteMeetingWithId = deleteMeeting.bind(null, Number(meeting.id));
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-5 hover:shadow-md transition-shadow">
       <div className="flex justify-between items-center mb-4">
@@ -24,12 +27,31 @@ export default function MeetingCard({ meeting }: MeetingCardProps) {
         <p><span className="font-semibold text-slate-700">Conducting:</span> {meeting.conducting}</p>
       </div>
 
-      <Link 
-        href={`/meetings/${meeting.id}`}
-        className="inline-block bg-slate-800 text-white text-sm font-medium px-4 py-2 rounded hover:bg-slate-700 transition-colors"
-      >
-        View Agenda
-      </Link>
+      {/* Botones de acción agrupados */}
+      <div className="flex gap-2">
+        <Link 
+          href={`/meetings/${meeting.id}`}
+          className="inline-block bg-slate-800 text-white text-sm font-medium px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+        >
+          View Agenda
+        </Link>
+        <Link 
+          href={`/meetings/${meeting.id}/edit`}
+          className="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+        >
+          Edit
+        </Link>
+        
+        {/* Formulario invisible para el Server Action de Eliminar */}
+        <form action={deleteMeetingWithId}>
+          <button 
+            type="submit" 
+            className="inline-block bg-red-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-red-700 transition-colors"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
