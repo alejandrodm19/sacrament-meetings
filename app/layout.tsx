@@ -1,14 +1,32 @@
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css'; 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer'; 
+import { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Sacrament Meeting Planner',
-  description: 'Application to plan and manage sacrament meetings.',
+  title: {
+    template: '%s | Sacrament Meeting Planner',
+    default: 'Sacrament Meeting Planner',
+  },
+  description: 'A comprehensive tool for bishoprics to plan, manage, and organize sacrament meetings.',
+  openGraph: {
+    title: 'Sacrament Meeting Planner',
+    description: 'A comprehensive tool for bishoprics to plan, manage, and organize sacrament meetings.',
+    siteName: 'Sacrament Meeting Planner',
+    images: [
+      {
+        url: '/hero.jpg', 
+        width: 1200,
+        height: 630,
+        alt: 'Sacrament Meeting Planner Hero Image',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

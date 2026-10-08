@@ -1,7 +1,8 @@
 import { getMeetings, getMeetingsPages } from '@/lib/meetings-db';
 import { MeetingSearch } from '@/components/MeetingSearch';
-import  MeetingCard  from '@/components/MeetingCard';
+import MeetingCard from '@/components/MeetingCard';
 import { Pagination } from '@/components/Pagination';
+import SignOutButton from '@/components/SignOutButton';
 
 export default async function MeetingsPage(props: {
   searchParams?: Promise<{ query?: string; page?: string }>;
@@ -17,7 +18,11 @@ export default async function MeetingsPage(props: {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Sacrament Meetings</h1>
+      {/* Contenedor flexible para el título y el botón de cerrar sesión */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Sacrament Meetings</h1>
+        <SignOutButton />
+      </div>
       
       <MeetingSearch />
       

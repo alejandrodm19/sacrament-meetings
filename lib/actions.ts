@@ -1,5 +1,7 @@
 'use server';
 
+import { signIn, signOut } from '@/auth';
+import { AuthError } from 'next-auth';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -8,7 +10,6 @@ import {
   updateMeeting as dbUpdateMeeting, 
   deleteMeeting as dbDeleteMeeting 
 } from './meetings-db';
-
 
 export type State = {
   errors?: {
@@ -109,4 +110,30 @@ export async function deleteMeeting(id: number) {
   } catch (error) {
     throw new Error('Database Error: Failed to Delete Meeting.');
   }
+}
+
+// --- AUTH ACTIONS ---
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid email or password.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+}
+
+export async function logOut() {
+  await signOut({ redirect: false });
+  return true;
 }
